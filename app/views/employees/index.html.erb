@@ -1,0 +1,54 @@
+<div id = "wrapper">
+  <%= render :partial => '/layouts/admin/top' %>
+  <div id = "container">
+    <%= render :partial => '/plugins/category' %>
+    <div id = "rightinner">
+      <div id = "titlegreenleft">
+        <div class="greentitle"><img src="/images/content.png" style="vertical-align:middle; margin-right:8px;" />Employee Management</div>
+      </div>
+      <br/><br/>
+      <div id = "matterinner">
+        <div id = "innerlinks"> 
+          <span class="link"><%= link_to "Employees" , employees_path  %></span> |
+          <span class="link"><%= link_to "Departments" , departments_path  %></span> |
+          <span class="link"><%= link_to "Designations" , designations_path  %></span> | 
+          <span class="link"><%= link_to "Hierarchies" , hierarchies_path  %></span> 
+        </div>
+			  <br/>
+        <h3> Employee Management </h3>
+        <%= error_messages_for 'employee' %>
+			  <br/>
+        <table width="601" border="1" cellspacing="0" cellpadding="0" bordercolor="#c5c3c3">
+          <tr>
+            <th width="54" align="center" valign="middle">Emp. ID</td>
+            <th width="94" align="center" valign="middle">Name</th>
+            <th width="83" align="center" valign="middle">Email</th>
+            <th width="111" align="center" valign="middle">Contact</th>
+            <th width="111" align="center" valign="middle">Designation</th>
+            <th width="111" align="center" valign="middle">Action</th>
+          </tr>
+          <% @employees.each do |employee| %>
+            <tr> 
+              <td align="center" valign="middle"><%= employee.employee_id %></td>
+              <td align="center" valign="middle"><%= link_to employee.first_name.titleize<<' '<<employee.last_name.titleize, :action => 'show', :id => employee %></td>
+              <td align="center" valign="middle"><%=employee.office_email if employee.office_email %></td>
+              <td align="center" valign="middle"><%=employee.mobile %></td>
+              <td align="center" valign="middle"><%=employee.designation.name  %></td>
+              <td align="center" valign="middle" class="tablelinks">
+                <%= link_to "Edit", edit_employee_path(employee) %>|
+                <%= link_to "Delete", employee_path(employee), :method => "delete" %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+        <br/>
+        <div class="greenbut" style="margin-left:250px; _margin-left:120px;">
+          <%= link_to "Add New", new_employee_path, :rel => "#overlay10" %>
+        </div>
+        <br/> <br/>
+      </div>
+      <div id = "rightinnerbottom"></div>
+    </div>
+    <div style="clear:both"></div>
+  </div><br/><br/><br/>
+</div>
