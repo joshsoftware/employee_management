@@ -103,7 +103,8 @@ class EmployeesController < ApplicationController
   end
 
   def add_employee_department(emp_id, dept_id)
-    emp_dept = EmployeeDepartment.find_emp_dept(emp_id, dept_id)
+    dept_id = dept_id.to_i
+    emp_dept = EmployeeDepartment.find_emp_dept(emp_id)
     if emp_dept.blank? 
       emp_dept = EmployeeDepartment.new("employee_id" => emp_id, "department_id" => dept_id )
       emp_dept.save!
